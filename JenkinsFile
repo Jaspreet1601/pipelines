@@ -6,7 +6,7 @@ pipeline{     agent any
     { 
         stage("checkout") 
         {             steps{ 
-                git branch: 'main', url: 'https://github.com/Jaspreet1601/pipelines/new/main' 
+                git branch: 'main', url: 'https://github.com/Jaspreet1601/pipelines.git' 
             } 
         } 
         stage("clean_01") 
