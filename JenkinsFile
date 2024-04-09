@@ -1,57 +1,30 @@
-pipeline {
+pipeline{
     agent any
-    tools {
-        maven 'm1'
-    }
+    tools {maven 'm1'}
     stages {
-        stage("checkout") {
-            steps {
-                git branch: 'main', url: 'https://github.com/Jaspreet1601/pipelines.git'
+        stage('Checkout'){
+            steps{
+                git branch: 'main', url: 'https://github.com/Jaspreet1601/JenkinsPipeline.git'
             }
         }
-        stage("clean") {
+        stage('Build'){
             steps {
-                bat 'mvn clean'
+                bat 'mvn clean install'
             }
         }
-        stage("validate") {
-            steps {
-                bat 'mvn validate'
-            }
-        }
-        stage("compile") {
-            steps {
-                bat 'mvn compile'
-            }
-        }
-        stage("test") {
+        stage('test'){
             steps {
                 bat 'mvn test'
             }
         }
-        stage("package") {
-            steps {
+        stage('Package'){
+            steps{
                 bat 'mvn package'
             }
         }
-        stage("integration-test") {
-            steps {
-                bat 'mvn integration-test'
-            }
-        }
-        stage("verify") {
-            steps {
-                bat 'mvn verify'
-            }
-        }
-        stage("install") {
-            steps {
-                bat 'mvn install'
-            }
-        }
-        stage("deploy") {
-            steps {
-                bat 'mvn deploy:deploy-file' // Corrected the deploy command
+        stage('Result'){
+            steps{
+                bat 'java -cp target/mavenproject-1.0-SNAPSHOT.jar com.example.App'
             }
         }
     }
